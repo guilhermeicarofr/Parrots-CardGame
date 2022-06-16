@@ -1,0 +1,46 @@
+/* fonte roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #EEF9BF;
+    width: 100vw;
+}
+
+body > h1 {
+    color: #75b79e;
+    font-family: 'Roboto', sans-serif;
+    font-size: 56px;
+    font-weight: bold;
+    text-align: center;
+    margin: 40px auto 47px auto;
+}
+
+.game {
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game > div {
+    width: 117px;
+    min-width: 117px;
+    height: 146px;
+    margin: 0px 17px 34px 17px;
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+}
+.game div.back {
+    
+}
+
+
+
+
+
+
