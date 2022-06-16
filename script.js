@@ -44,23 +44,37 @@ function initGame (number) {
 }
 
 let selected = [];
+let plays = 0;
 //funcao chamada pelo clique em uma carta
+//garantir nao clicar duas vezes na mesma carta
+//implementar delay antes de desvirar o par errado
+//implementar fim de jogo quando todos os pares ok
+//garantir a limpeza do array selected e funcionamento do contador plays
 function selectCard (card) {
-    if (selected[0]==null)
-        selected[0] = card.classList;
 
-    else {
-        selected [1] = card.classList;
-        alert(selected);
-        if (selected [0] === selected[1])
-            card.remove();
+    if (!card.classList.contains("turned")) {
+        card.classList.add('turned');
+        plays++;
+
+        if (selected[0]==null)
+            selected[0] = card;
+
+        else {
+            selected [1] = card;
+            if (selected[0].classList.value === selected[1].classList.value)
+                alert('Pares!!!');
+            else {
+                
+                selected[0].classList.remove('turned');
+                selected[1].classList.remove('turned');
+                alert ('Não pares');
+            }
 
 
 
 
-
-
-        selected = [];
+            selected = [];
+        }
     }
 }
 
