@@ -1,8 +1,3 @@
-//funcao copiada do Notion para aleatoriedade
-function comparador() { 
-	return Math.random() - 0.5; 
-}
-
 //array com todos os tipos de papagaio
 const types = ['bobrossparrot' , 'explodyparrot' , 'fiestaparrot' , 'metalparrot' , 'revertitparrot' , 'tripletsparrot' , 'unicornparrot'];
 
@@ -13,6 +8,12 @@ let points = 0; //numero de pares já encontrados
 let time = 0; //contador de tempo do bonus
 let timerId = 0;
 
+
+
+//funcao copiada do Notion para aleatoriedade
+function comparador() { 
+	return Math.random() - 0.5; 
+}
 //cria array usado para gerar as cartas já embaralhadas
 function createRandomPairList(number) {
     let list = [];
@@ -56,9 +57,11 @@ function addTime() {
     document.querySelector("div.timer").innerHTML = `${time}`;
 }
 
+
+
 //funcao que inicializa o jogo perguntando numero de cartas
 function initGame() { 
-    number = prompt('Quantidade de cartas (Par de 4 a 14)');
+    number = prompt('Quantidade de cartas (Número par de 4 a 14):');
     if (number%2 != 0 || number < 4 || number > 14 || isNaN(number))
         initGame();
     
@@ -75,7 +78,7 @@ function initGame() {
 function endGame () {
     clearInterval(timerId);
     alert(`Você ganhou em ${plays} jogadas depois de ${time}s!`);
-    let reset = prompt("Reiniciar a partida?");
+    let reset = prompt("Reiniciar a partida? (sim ou não)");
     if (reset === 'sim')
         initGame();
     else if (reset === 'não')
@@ -85,28 +88,31 @@ function endGame () {
 }
 
 
+
 //funcao chamada pelo clique em uma carta
 function selectCard (card) {
 
-    if (!card.classList.contains("turned")) { //impede o duplo click na mesma carta ou em alguma já virada
-        card.classList.add('turned');
-        plays++;
+    if (selected [1] == null) { //impede que uma carta seja selecionada antes que um par errado seja virado de volta a posicao inicial
+        if (!card.classList.contains("turned")) { //impede o duplo click na mesma carta ou em alguma já virada de um par correto
+            card.classList.add('turned');
+            plays++;
 
-        if (selected[0] == null) //verifica se é a primeira virada ou a segunda
-            selected[0] = card;
+            if (selected[0] == null) //verifica se a selecionada é a primeira carta virada da jogada ou a segunda carta
+                selected[0] = card;
 
-        else {
-            selected [1] = card;
+            else { // no caso de já ser a segunda carta inicia as comparacoes
+                selected [1] = card;
 
-            if (selected[0].classList.value === selected[1].classList.value) { //verifica se as viradas são pares
-                selected = [];
-                points++;
-            } else {
-                setTimeout(unturnWrongCards, 1000);
+                if (selected[0].classList.value === selected[1].classList.value) { //verifica se as viradas são um par ou não
+                    selected = [];
+                    points++;
+                } else {
+                    setTimeout(unturnWrongCards, 1000);
+                }
+
+                if (points == number/2) //verifica se todos os pares já foram encontrados
+                    setTimeout(endGame,500);
             }
-
-            if (points == number/2) //verifica se todos os pares já foram encontrados
-                setTimeout(endGame,500);
         }
     }
 }

@@ -85,9 +85,8 @@ div.timer {
     color: #EEF9BF;
 }
 
-
-
-@media (max-width: 350px) {
+/* responsividade mobile */
+@media (max-width: 400px) {
     .game {
         display: flex;
         flex-wrap: nowrap;
