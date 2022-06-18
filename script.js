@@ -1,4 +1,4 @@
-//funcao copiada do Notion
+//funcao copiada do Notion para aleatoriedade
 function comparador() { 
 	return Math.random() - 0.5; 
 }
@@ -11,8 +11,9 @@ let selected = []; //array duas posicoes contendo as cartas viradas na jogada at
 let plays = 0; //numero de jogadas, vezes que se virou uma carta
 let points = 0; //numero de pares já encontrados
 let time = 0; //contador de tempo do bonus
+let timerId = 0;
 
-//funcoes de criação das cartas
+//cria array usado para gerar as cartas já embaralhadas
 function createRandomPairList(number) {
     let list = [];
     let j = 0;
@@ -23,7 +24,9 @@ function createRandomPairList(number) {
     }
     return list.sort(comparador);
 }
-function createCards(cards) {    
+//usa array de pares embaralhados para gerar as cartas e reseta o timer
+function createCards(cards) {
+    document.querySelector("div.timer").innerHTML = '0';
     document.querySelector(".game").innerHTML = '';
     for (let i=0;i<cards.length;i++) {
         document.querySelector(".game").innerHTML += `
@@ -46,11 +49,15 @@ function unturnWrongCards() {
     selected = [];
 }
 
-
+//contador de tempo de jogo
+function addTime() {
+    document.querySelector("div.timer").innerHTML = '0';
+    time++;
+    document.querySelector("div.timer").innerHTML = `${time}`;
+}
 
 //funcao que inicializa o jogo perguntando numero de cartas
-function initGame() {
-    
+function initGame() { 
     number = prompt('Quantidade de cartas (Par de 4 a 14)');
     if (number%2 != 0 || number < 4 || number > 14 || isNaN(number))
         initGame();
@@ -62,10 +69,12 @@ function initGame() {
 
     let cards = createRandomPairList(number);
     createCards(cards);
+    timerId = setInterval(addTime,1000);
 }
 //funcao que finaliza o jogo e reseta para o novo inicio
 function endGame () {
-    alert(`Você ganhou em ${plays} jogadas!`);
+    clearInterval(timerId);
+    alert(`Você ganhou em ${plays} jogadas depois de ${time}s!`);
     let reset = prompt("Reiniciar a partida?");
     if (reset === 'sim')
         initGame();
@@ -74,7 +83,6 @@ function endGame () {
     else
         endGame();
 }
-
 
 
 //funcao chamada pelo clique em uma carta
