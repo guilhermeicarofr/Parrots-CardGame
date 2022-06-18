@@ -10,18 +10,25 @@ body {
 }
 body > h1 {
     color: #75b79e;
+    background-color: #EEF9BF;
     font-family: 'Roboto', sans-serif;
+    width: 100vw;
     font-size: 56px;
+    line-height: 63px;
     font-weight: bold;
     text-align: center;
-    margin: 40px auto 47px auto;
+    position: absolute;
+    top: 0px;
+    padding-top: 40px;
+    margin: 0px auto 47px auto;
 }
 
 .game {
     width: auto;
-    margin: 100px auto;
+    margin: 150px auto 50px auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* cards */
@@ -71,9 +78,9 @@ div.timer {
     min-width: 50px;
     height: 50px;
     background-color: #75b79e;
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 15px 0px 0px 0px;
     position: fixed;
-    top: 100px;
+    bottom: 0px;
     right: 0px;
     padding: 0px 10px;
     display: flex;
@@ -83,9 +90,16 @@ div.timer {
     font-weight: bold;
     font-family: 'Roboto', sans-serif;
     color: #EEF9BF;
+    z-index: 1;
+    opacity: 0.6;
 }
 
 /* responsividade mobile */
+@media (max-width: 540px) {
+    .game {
+        margin: 200px auto 50px auto;
+    }
+}
 @media (max-width: 400px) {
     .game {
         display: flex;

@@ -1,20 +1,25 @@
-//array com todos os tipos de papagaio
-const types = ['bobrossparrot' , 'explodyparrot' , 'fiestaparrot' , 'metalparrot' , 'revertitparrot' , 'tripletsparrot' , 'unicornparrot'];
-
+const types = [ //array com todos os tipos de parrot possíveis
+    'bobrossparrot',
+    'explodyparrot',
+    'fiestaparrot',
+    'metalparrot',
+    'revertitparrot',
+    'tripletsparrot',
+    'unicornparrot'
+];
 let number = 0; //numero de cartas declarado pelo player
 let selected = []; //array duas posicoes contendo as cartas viradas na jogada atual
 let plays = 0; //numero de jogadas, vezes que se virou uma carta
 let points = 0; //numero de pares já encontrados
 let time = 0; //contador de tempo do bonus
-let timerId = 0;
-
+let timerId = 0; //identificador para reset do timer de jogo
 
 
 //funcao copiada do Notion para aleatoriedade
 function comparador() { 
 	return Math.random() - 0.5; 
 }
-//cria array usado para gerar as cartas já embaralhadas
+//cria array de pares de parrot embaralhados usado para gerar as cartas já embaralhadas
 function createRandomPairList(number) {
     let list = [];
     let j = 0;
@@ -25,7 +30,7 @@ function createRandomPairList(number) {
     }
     return list.sort(comparador);
 }
-//usa array de pares embaralhados para gerar as cartas e reseta o timer
+//usa array de pares embaralhados para gerar as cartas no DOM e reseta o timer
 function createCards(cards) {
     document.querySelector("div.timer").innerHTML = '0';
     document.querySelector(".game").innerHTML = '';
@@ -58,7 +63,6 @@ function addTime() {
 }
 
 
-
 //funcao que inicializa o jogo perguntando numero de cartas
 function initGame() { 
     number = prompt('Quantidade de cartas (Número par de 4 a 14):');
@@ -74,7 +78,7 @@ function initGame() {
     createCards(cards);
     timerId = setInterval(addTime,1000);
 }
-//funcao que finaliza o jogo e reseta para o novo inicio
+//funcao que finaliza o jogo e reseta para o novo inicio caso desejado
 function endGame () {
     clearInterval(timerId);
     alert(`Você ganhou em ${plays} jogadas depois de ${time}s!`);
@@ -88,8 +92,7 @@ function endGame () {
 }
 
 
-
-//funcao chamada pelo clique em uma carta
+//funcao chamada pelo clique em uma carta, vira as cartas, compara os pares e monitora fim de jogo
 function selectCard (card) {
 
     if (selected [1] == null) { //impede que uma carta seja selecionada antes que um par errado seja virado de volta a posicao inicial
