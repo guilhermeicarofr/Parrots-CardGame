@@ -68,15 +68,16 @@ function initGame() {
     number = prompt('Quantidade de cartas (Número par de 4 a 14):');
     if (number%2 != 0 || number < 4 || number > 14 || isNaN(number))
         initGame();
-    
-    selected = [];
-    plays = 0;
-    points = 0;
-    time = 0;
+    else {
+        selected = [];
+        plays = 0;
+        points = 0;
+        time = 0;
 
-    let cards = createRandomPairList(number);
-    createCards(cards);
-    timerId = setInterval(addTime,1000);
+        let cards = createRandomPairList(number);
+        createCards(cards);
+        timerId = setInterval(addTime,1000);
+    }
 }
 //funcao que finaliza o jogo e reseta para o novo inicio caso desejado
 function endGame () {
